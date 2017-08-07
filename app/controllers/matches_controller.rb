@@ -24,6 +24,12 @@ class MatchesController < ApplicationController
     guess.chars.all? { |letter| guess.count(letter) <= grid.count(letter) }
   end
 
+  def english_word?(word)
+    response = open("https://wagon-dictionary.herokuapp.com/#{word}")
+    json = JSON.parse(response.read)
+    return json['found']
+  end
+
   def compute_score(attempt, time_taken)
     time_taken > 60.0 ? 0 : attempt.size * (1.0 - time_taken / 60.0)
   end
@@ -33,16 +39,12 @@ class MatchesController < ApplicationController
       if english_word?(attempt)
         return "well done"
       else
+        @score = 0
         return "not a english_word"
       end
     else
+      @score = 0
       return "not in the grid"
     end
-  end
-
-  def english_word?(word)
-    response = open("https://wagon-dictionary.herokuapp.com/#{word}")
-    json = JSON.parse(response.read)
-    return json['found']
   end
 end
