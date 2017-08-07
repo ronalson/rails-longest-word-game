@@ -1,2 +1,8 @@
-<h1>Matches#show</h1>
-<p>Find me in app/views/matches/show.html.erb</p>
+<h1>Now your result</h1>
+<p>Your word: <%= @guess %></p>
+<p>Time Taken to answer: <%= @time_taken %></p>
+<p>Your score: <%= @score %></p>
+<p>Message: <%= @message %></p>
+
+
+<%= link_to "Try again!", game_path %>

@@ -1,2 +1,14 @@
-<h1>Matches#new</h1>
-<p>Find me in app/views/matches/new.html.erb</p>
+<h1>Welcome to the longest word-game!</h1>
+<p>Here is your grid:</p>
+<ul class="letter-grid">
+  <% @grid.each do |letter| %>
+    <li><%= letter %></li>
+  <% end %>
+</ul>
+<form action="/score">
+  <label for="">What's your best shot?</label>
+  <input type="text" name="guess" value="">
+  <input type="hidden" name="grid" value="<%= @grid %>">
+  <input type="hidden" name="start_time" value="<%= @start_time %>">
+  <input type="submit">
+</form>
